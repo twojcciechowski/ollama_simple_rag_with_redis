@@ -18,7 +18,7 @@ def create_new_vectorDb():
     vector_store = RedisVectorStore(redis_url="redis://localhost:6379", overwrite=True, index_name="test_idx")
     storage_context = StorageContext.from_defaults(vector_store=vector_store)
     embed_model = resolve_embed_model("local:sentence-transformers/all-mpnet-base-v2")
-    parser = LlamaParse(result_type=ResultType.TXT, api_key="")
+    parser = LlamaParse(result_type=ResultType.TXT, api_key="<<put you api key here>>")
     file_extractor = {".pdf": parser}
     documents = SimpleDirectoryReader(input_dir="./data", file_extractor=file_extractor).load_data()
     VectorStoreIndex.from_documents(documents=documents, storage_context=storage_context, embed_model=embed_model)
